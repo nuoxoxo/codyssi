@@ -5,25 +5,19 @@ B = {}
 for i in range(10): B[str(i)] = i
 cnt = 10
 for o in range(ord('A'),ord('Z')+1):
-    B[chr(o)] = cnt
-    cnt += 1
+    B[chr(o)], cnt = cnt, cnt + 1
 for o in range(ord('a'),ord('z')+1):
-    B[chr(o)] = cnt
-    cnt += 1
-
-B['!']=62
-B['@']=63
-B['#']=64
-B['$']=65
-B['%']=66
-B['^']=67
-rev = {v:k for k,v in B.items()}
+    B[chr(o)], cnt = cnt, cnt + 1
 
 def conv10(s,base):
     res = 0
     for c in s:
         res = res * base + B[c]
     return res
+
+for c in '!@#$%^':
+    B[c], cnt = cnt, cnt + 1
+rev = {v:k for k,v in B.items()}
 
 def conv68(n):
     res = ''
@@ -33,13 +27,14 @@ def conv68(n):
         n //= 68
     return res
 
-res = 0
+p1 = 0
 S = 0
 for l,r in A:
     tmp = conv10(l,r)
-    res = max(res,tmp)
+    p1 = max(p1,tmp)
     S += tmp
-print('part 1/',res)
+
+print('part 1/',p1)
 print('part 2/',conv68(S),'sum/',S)
 
 """
@@ -57,4 +52,4 @@ hence formula/
     P >= (N+1) ** .25
 """
 p3 = (S + 1) ** .25
-print('part 3/',int(p3),'- raw/',p3)
+print('part 3/',int(p3) + 1,'- raw/',p3)
