@@ -18,7 +18,6 @@ def knap(T) -> int:
                 qll,css,comb = dp[r-1][c - cs]
                 qll += ql
                 css += ma
-                arr = comb + [name]
                 if qll > dp[r][c][0]:
                     dp[r][c] = (qll, css, comb + [name] )
                 elif qll == dp[r][c][0] and css < dp[r][c][1]:
